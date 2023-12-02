@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TriggerPoint : MonoBehaviour
 {
+    [SerializeField] private Camera camera;
+
     [SerializeField] private Transform slenderSpawnPoint;
     [SerializeField] private GameObject slenderman;
 
@@ -24,10 +26,30 @@ public class TriggerPoint : MonoBehaviour
     private IEnumerator HideSlender(GameObject slendermanToHide)
     {
         yield return new WaitForSeconds(1f);
-
-        slendermanToHide.SetActive(false);
-
+        
+        if(IsVisible(camera, slendermanToHide))
+        {
+            slendermanToHide.SetActive(false);
+        }
+        
         yield return new WaitForSeconds(1.1f);
         gameObject.SetActive(false);
     }
+
+    private bool IsVisible(Camera c, GameObject target)
+    {
+        var planes = GeometryUtility.CalculateFrustumPlanes(c);
+        var point = target.transform.position;
+
+        foreach(var plane in planes)
+        {
+            if(plane.GetDistanceToPoint(point) > 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 }
