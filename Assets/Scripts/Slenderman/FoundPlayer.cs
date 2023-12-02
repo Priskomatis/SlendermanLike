@@ -47,19 +47,19 @@ public class FoundPlayer : MonoBehaviour
 
     void ShortRange()
     {
-        Debug.Log("Player is in close range");
+        //Debug.Log("Player is in close range");
     }
     void MedRange()
     {
-        Debug.Log("Player is in medium range");
+        //Debug.Log("Player is in medium range");
     }
     void LongRange()
     {
-        Debug.Log("Player is in long range");
+        //Debug.Log("Player is in long range");
     }
 
     void OutOfRange()
     {
-        Debug.Log("Player is nowhere to be seen");
+        //Debug.Log("Player is nowhere to be seen");
     }
 }
