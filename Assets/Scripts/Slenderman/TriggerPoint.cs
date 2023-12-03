@@ -21,10 +21,13 @@ public class TriggerPoint : MonoBehaviour
     [SerializeField] private Transform slenderSpawnPoint;
     [SerializeField] private GameObject slenderman;
 
+    private bool hasSpawned = false;
+
+
     private void OnTriggerEnter(Collider other)
     {
         // If the player steps inside the trigger area that we set;
-        if (other.gameObject.CompareTag("Player"))
+        if (!hasSpawned && other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player here!");
 
@@ -34,40 +37,41 @@ public class TriggerPoint : MonoBehaviour
             // Start coroutines for hiding slenderman and the TriggerPoint GameObject;
             //This makes to so we disable the slenderman game object after fixed amount of time has passed;
             StartCoroutine(HideSlender(instantiatedSlenderman));
+            hasSpawned = true;
         }
     }
 
     private IEnumerator HideSlender(GameObject slendermanToHide)
     {
-        // Wait 1f seconds before continuing;
-        yield return new WaitForSeconds(1f);
-        
-        //Call the function to check when to disable slenderman prefab;
-        if(IsVisible(camera, slendermanToHide))
+        while (!IsPlayerLookingAt(slendermanToHide))
         {
-            slendermanToHide.SetActive(false);
+            yield return new WaitForSeconds(0.1f);
         }
+        slendermanToHide.SetActive(false);
         
-        yield return new WaitForSeconds(1.1f);
-        gameObject.SetActive(false);
     }
 
-    // Function to check if slenderman is visible in the camera view
-    private bool IsVisible(Camera c, GameObject target)
+    private bool IsPlayerLookingAt(GameObject target)
     {
-        //Calculates frustum planes by taking the camer's views and returns 6 planes that form it;
-        var planes = GeometryUtility.CalculateFrustumPlanes(c);
-        var point = target.transform.position;
-
-        foreach(var plane in planes)
+        RaycastHit hit;
+        if(Physics.Raycast(camera.transform.position, camera.transform.forward, out hit))
         {
-            if(plane.GetDistanceToPoint(point) > 0)
+            if (hit.collider.gameObject == target)
             {
-                return false;
+                Debug.Log("Found slender");
+                return true;
             }
         }
-        return true;
+        else
+        {
+            Debug.Log("Nowhere to be seen.");
+        }
+        return false;
     }
+
+
+
+
 
 
 }
