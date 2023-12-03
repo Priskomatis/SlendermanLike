@@ -23,6 +23,8 @@ public class TriggerPoint : MonoBehaviour
 
     private bool hasSpawned = false;
 
+    [SerializeField] private AudioSource jumpScare;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -47,6 +49,7 @@ public class TriggerPoint : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
         }
+        //yield return new WaitForSeconds(0.3f);
         slendermanToHide.SetActive(false);
         
     }
@@ -58,7 +61,10 @@ public class TriggerPoint : MonoBehaviour
         {
             if (hit.collider.gameObject == target)
             {
+                jumpScare.Play();
                 Debug.Log("Found slender");
+                
+
                 return true;
             }
         }
