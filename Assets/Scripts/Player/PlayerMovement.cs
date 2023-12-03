@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+	//Audios
+	[SerializeField] private AudioSource[] audio_movement;
+
 
 	public Camera playerCamera;
 	public float walkSpeed = 6f;
@@ -41,6 +44,39 @@ public class PlayerMovement : MonoBehaviour
 
 		float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
 
+		bool isMoving = Mathf.Abs(curSpeedX) > 0.1f || Mathf.Abs(curSpeedY) > 0.1f;
+
+		//While player is moving, sound must be playing
+		if (isMoving)
+		{
+			if (isRunning && !audio_movement[0].isPlaying)
+			{
+				Debug.Log("Running: Starting audio_movement[1]");
+				audio_movement[1].Play();
+			}
+			else if (isRunning && audio_movement[0].isPlaying)
+			{
+				Debug.Log("Running: Stopping audio_movement[0] and starting audio_movement[1]");
+				audio_movement[0].Stop();
+				audio_movement[1].Play();
+			}
+			else if (!isRunning && !audio_movement[0].isPlaying)
+			{
+				Debug.Log("Walking: Starting audio_movement[0]");
+				audio_movement[0].Play();
+			}
+		}
+		else
+		{
+			Debug.Log("Stopping all audio");
+			audio_movement[0].Stop();
+			audio_movement[1].Stop();
+		}
+
+
+
+
+
 		float movementDirectionY = moveDirection.y;
 
 
@@ -63,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
 		characterController.Move(moveDirection * Time.deltaTime);
         if (canMove)
         {
+			
 			rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
 			rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
 			playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
