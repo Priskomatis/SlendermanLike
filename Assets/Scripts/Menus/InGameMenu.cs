@@ -12,6 +12,9 @@ public class InGameMenu : MonoBehaviour
 
     private bool menuOpen;
 
+    //States
+    enum States { pause, resume};
+
     private void Start()
     {
         pc = FindObjectOfType<PlayerController>();
@@ -23,14 +26,36 @@ public class InGameMenu : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
+
+            //If menu is already open
             if (menuOpen)
             {
+                //Unpause the game
+                UnPause();
+
+                //Close the menu panel
                 menuPanel.SetActive(false);
                 menuOpen = false;
-            } else
+
+                //Disable cursor
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            //if menu is not open
+            else
             {
+                //Pause the game
+                Pause();
+
+                //Activate the menu panel
                 menuPanel.SetActive(true);
                 menuOpen = true;
+
+                //Enable cursor
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+
             }
 
         }
@@ -38,5 +63,24 @@ public class InGameMenu : MonoBehaviour
     public void PagesUI()
     {
         pagesCount.text = pc.pages.ToString();
+    }
+
+    public void Resume()
+    {
+        //Closes game;
+        menuPanel.SetActive(false);
+
+        //Stops the game from running
+        UnPause();
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = 1f;
     }
 }
