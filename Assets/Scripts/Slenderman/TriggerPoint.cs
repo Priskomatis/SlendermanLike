@@ -25,6 +25,41 @@ public class TriggerPoint : MonoBehaviour
 
     [SerializeField] private AudioSource jumpScare;
 
+    public enum Direction
+    {
+        North,
+        East,
+        West,
+        South
+    }
+
+    [Header("Direction List")]
+    public Direction[] directions;
+
+    private float currentDirection;
+
+    private void Start()
+    {
+
+        //We do this to find out the correct position of slender's rotation, so that we can play him looking at the player;
+        if(directions[0].ToString() == "North")
+        {
+            currentDirection = 0f;
+        }
+        else if (directions[0].ToString() == "South")
+        {
+            currentDirection = 90f;
+        }
+        else if (directions[0].ToString() == "West")
+        {
+            currentDirection = 180f;
+        }
+        else
+        {
+            currentDirection = 270f;
+        }
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,7 +69,7 @@ public class TriggerPoint : MonoBehaviour
             Debug.Log("Player here!");
 
             // Instantiate slenderman and store the reference
-            GameObject instantiatedSlenderman = Instantiate(slenderman, slenderSpawnPoint.position, Quaternion.Euler(0f, 180, 0f));
+            GameObject instantiatedSlenderman = Instantiate(slenderman, slenderSpawnPoint.position, Quaternion.Euler(0f, currentDirection, 0f));
 
             // Start coroutines for hiding slenderman and the TriggerPoint GameObject;
             //This makes to so we disable the slenderman game object after fixed amount of time has passed;
