@@ -24,7 +24,6 @@ public class TriggerPoint : MonoBehaviour
     private bool hasSpawned = false;
 
     [SerializeField] private AudioSource jumpScare;
-
     public enum Direction
     {
         North,
@@ -89,11 +88,14 @@ public class TriggerPoint : MonoBehaviour
         
     }
 
+
+
     private bool IsPlayerLookingAt(GameObject target)
     {
         RaycastHit hit;
-        if(Physics.Raycast(camera.transform.position, camera.transform.forward, out hit))
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit))
         {
+
             if (hit.collider.gameObject == target)
             {
                 jumpScare.Play();
