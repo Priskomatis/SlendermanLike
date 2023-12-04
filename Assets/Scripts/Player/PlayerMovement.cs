@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("Stopping all audio");
+			//Debug.Log("Stopping all audio");
 			audio_movement[0].Stop();
 			audio_movement[1].Stop();
 		}

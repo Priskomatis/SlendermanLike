@@ -7,7 +7,7 @@ public class PageController : MonoBehaviour
 {
     private bool collectable = false;
 
-    private PlayerController pc;
+    [SerializeField] private PlayerController pc;
 
 
     [SerializeField] private GameObject pagePanel;
@@ -16,10 +16,12 @@ public class PageController : MonoBehaviour
     [SerializeField] private MeshRenderer graphics;
 
     [SerializeField] private AudioSource audioSource;
+    private AudioManager audioManager;
 
     private void Start()
     {
-        pc = FindObjectOfType<PlayerController>();
+        //pc = FindObjectOfType<PlayerController>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -28,10 +30,14 @@ public class PageController : MonoBehaviour
         {
             Debug.Log("Collect page: "+gameObject.name);
 
+
+
             audioSource.Play();
 
             pc.pages += 1;
             pc.getPages();
+
+            audioManager.ChangeAudio(pc.pages);
 
             graphics.enabled = false;
 
