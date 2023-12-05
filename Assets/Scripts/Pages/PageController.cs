@@ -18,10 +18,15 @@ public class PageController : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     private AudioManager audioManager;
 
+    private SpeechController speechController;
+
+    [SerializeField] private TextMeshProUGUI pageNumber;
+
     private void Start()
     {
         //pc = FindObjectOfType<PlayerController>();
         audioManager = FindObjectOfType<AudioManager>();
+        speechController = FindObjectOfType<SpeechController>();
     }
 
     private void Update()
@@ -37,6 +42,8 @@ public class PageController : MonoBehaviour
             pc.pages += 1;
             pc.getPages();
 
+            StartCoroutine(speechController.SetText());
+
             audioManager.ChangeAudio(pc.pages);
 
             graphics.enabled = false;
@@ -44,6 +51,9 @@ public class PageController : MonoBehaviour
             //UI Activation;
             pagePanel.SetActive(true);
             pageText.text = (pc.pages.ToString()+"/8");
+
+            pageNumber.text = (pc.pages).ToString();
+            
 
 
             StartCoroutine(PageDisappear());           
