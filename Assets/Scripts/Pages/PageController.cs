@@ -76,6 +76,7 @@ public class PageController : MonoBehaviour
 
         // Deactivate the entire GameObject
         gameObject.SetActive(false);
+        
     }
 
     private void OnTriggerEnter(Collider other)
