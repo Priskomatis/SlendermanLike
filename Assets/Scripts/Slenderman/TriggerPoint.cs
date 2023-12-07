@@ -25,6 +25,9 @@ public class TriggerPoint : MonoBehaviour
 
     [SerializeField] private AudioSource jumpScare;
     [SerializeField] private AudioSource heartBeat;
+
+    private Flashlight flashLight;
+    [SerializeField] Light light;
     public enum Direction
     {
         North,
@@ -40,6 +43,8 @@ public class TriggerPoint : MonoBehaviour
 
     private void Start()
     {
+
+        flashLight = FindObjectOfType<Flashlight>();
 
         //We do this to find out the correct position of slender's rotation, so that we can play him looking at the player;
         if(directions[0].ToString() == "North")
@@ -103,7 +108,16 @@ public class TriggerPoint : MonoBehaviour
             {
                 jumpScare.Play();
                 Debug.Log("Found slender");
-                
+
+                //Test - turn off the flashlight and the light
+                flashLight.ToggleLight();
+                if(light!= null)
+                {
+                    light.enabled = false;
+
+                }
+
+
 
                 return true;
             }

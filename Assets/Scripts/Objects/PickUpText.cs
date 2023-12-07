@@ -14,12 +14,14 @@ public class PickUpText : MonoBehaviour
         {
             pickUpText.SetActive(true);
             text.text = "Press 'E' to collect page";
+            StartCoroutine(DisappearText());
 
         }
         else if (other.CompareTag("Door"))
         {
             pickUpText.SetActive(true);
             text.text = "Press 'E' to open";
+            StartCoroutine(DisappearText());
         }
 
     }
@@ -30,6 +32,12 @@ public class PickUpText : MonoBehaviour
             pickUpText.SetActive(false);
         }
         
+    }
+
+    private IEnumerator DisappearText()
+    {
+        yield return new WaitForSeconds(3f);
+        pickUpText.SetActive(false);
     }
 
 }
