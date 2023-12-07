@@ -24,6 +24,7 @@ public class TriggerPoint : MonoBehaviour
     private bool hasSpawned = false;
 
     [SerializeField] private AudioSource jumpScare;
+    [SerializeField] private AudioSource heartBeat;
     public enum Direction
     {
         North,
@@ -85,7 +86,9 @@ public class TriggerPoint : MonoBehaviour
         }
         //yield return new WaitForSeconds(0.3f);
         slendermanToHide.SetActive(false);
-        
+        heartBeat.Play();
+
+
     }
 
 
