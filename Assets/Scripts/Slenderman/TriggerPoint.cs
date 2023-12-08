@@ -89,9 +89,26 @@ public class TriggerPoint : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
         }
-        //yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
+
         slendermanToHide.SetActive(false);
         heartBeat.Play();
+        //Test - turn off the flashlight and the light
+        flashLight.ToggleLight();
+        if (light != null)
+        {
+            light.enabled = false;
+            yield return new WaitForSeconds(0.2f);
+            light.enabled = true;
+            yield return new WaitForSeconds(0.2f);
+            light.enabled = false;
+            yield return new WaitForSeconds(0.2f);
+            light.enabled = true;
+            yield return new WaitForSeconds(0.2f);
+            light.enabled = false;
+
+        }
+        
 
 
     }
@@ -108,15 +125,6 @@ public class TriggerPoint : MonoBehaviour
             {
                 jumpScare.Play();
                 Debug.Log("Found slender");
-
-                //Test - turn off the flashlight and the light
-                flashLight.ToggleLight();
-                if(light!= null)
-                {
-                    light.enabled = false;
-
-                }
-
 
 
                 return true;

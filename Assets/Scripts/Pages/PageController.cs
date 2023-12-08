@@ -21,6 +21,10 @@ public class PageController : MonoBehaviour
     private SpeechController speechController;
 
     [SerializeField] private TextMeshProUGUI pageNumber;
+    //Text for when you pick up a page;
+
+    [SerializeField] private string textPagePickUp;
+
 
     private void Start()
     {
@@ -35,14 +39,47 @@ public class PageController : MonoBehaviour
         {
             Debug.Log("Collect page: "+gameObject.name);
 
-
-
             audioSource.Play();
 
             pc.pages += 1;
             pc.getPages();
 
-            StartCoroutine(speechController.SetText());
+            //Check to see what text will appear based on how many pages the player got;
+            if(pc.pages == 1)
+            {
+                textPagePickUp = "What? What is this page?";
+            }
+            else if(pc.pages == 2)
+            {
+                textPagePickUp = "What the hell kind of joke is this";
+            }
+            else if (pc.pages == 3)
+            {
+                textPagePickUp = "WHY ARE YOU DOING THIS?";
+            }
+            else if (pc.pages == 4)
+            {
+                textPagePickUp = "This gotta end...";
+            }
+            else if (pc.pages ==5)
+            {
+                textPagePickUp = "Oh god help me...";
+            }
+            else if (pc.pages == 6)
+            {
+                textPagePickUp = "How many more are there?";
+            }
+            else if (pc.pages == 7)
+            {
+                textPagePickUp = "I want this nightmare to be over..";
+            }
+            else if (pc.pages == 8)
+            {
+                textPagePickUp = "Please leave me alone";
+            }
+
+
+            StartCoroutine(speechController.SetText(textPagePickUp));
 
             audioManager.ChangeAudio(pc.pages);
 
