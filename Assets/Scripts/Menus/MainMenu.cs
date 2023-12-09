@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    private Animation anim;
+     [SerializeField] private Animation anim;
+     [SerializeField] private Animation anim2;
 
     private void Start()
     {
         anim = GetComponentInChildren<Animation>();
         anim.Play();
+        
     }
 }
