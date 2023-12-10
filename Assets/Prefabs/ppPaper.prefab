@@ -60,10 +60,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f82d9ceee611bd045a0e8083242d6d09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pc: {fileID: 0}
   pagePanel: {fileID: 0}
   pageText: {fileID: 0}
   graphics: {fileID: 8666925389199253231}
   audioSource: {fileID: 919132147896167827}
+  pageNumber: {fileID: 0}
+  textPagePickUp: 
 --- !u!82 &919132147896167827
 AudioSource:
   m_ObjectHideFlags: 0

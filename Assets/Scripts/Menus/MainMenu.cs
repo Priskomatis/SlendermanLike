@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-     [SerializeField] private Animation anim;
-     [SerializeField] private Animation anim2;
-
-    private void Start()
+     public void StartGame()
     {
-        anim = GetComponentInChildren<Animation>();
-        anim.Play();
-        
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

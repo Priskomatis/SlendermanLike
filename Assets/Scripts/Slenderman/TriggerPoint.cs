@@ -21,6 +21,8 @@ public class TriggerPoint : MonoBehaviour
     [SerializeField] private Transform slenderSpawnPoint;
     [SerializeField] private GameObject slenderman;
 
+    [SerializeField] Transform pc;
+
     private bool hasSpawned = false;
 
     [SerializeField] private AudioSource jumpScare;
@@ -28,18 +30,19 @@ public class TriggerPoint : MonoBehaviour
 
     private Flashlight flashLight;
     [SerializeField] Light light;
-    public enum Direction
+    //Foudn a better way to do this with transform.LookAt();
+    /**public enum Direction
     {
         North,
         East,
         West,
         South
-    }
+    //
 
     [Header("Direction List")]
-    public Direction[] directions;
+    public Direction[] directions;*/
 
-    private float currentDirection;
+    private float currentDirection =0f;
 
     private void Start()
     {
@@ -47,7 +50,7 @@ public class TriggerPoint : MonoBehaviour
         flashLight = FindObjectOfType<Flashlight>();
 
         //We do this to find out the correct position of slender's rotation, so that we can play him looking at the player;
-        if(directions[0].ToString() == "North")
+        /*if(directions[0].ToString() == "North")
         {
             currentDirection = 0f;
         }
@@ -62,7 +65,7 @@ public class TriggerPoint : MonoBehaviour
         else
         {
             currentDirection = 270f;
-        }
+        }*/
     }
 
 
@@ -71,13 +74,15 @@ public class TriggerPoint : MonoBehaviour
         // If the player steps inside the trigger area that we set;
         if (!hasSpawned && other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player here!");
+            // Debug.Log("Player here!");
 
             // Instantiate slenderman and store the reference
             GameObject instantiatedSlenderman = Instantiate(slenderman, slenderSpawnPoint.position, Quaternion.Euler(0f, currentDirection, 0f));
-
+            instantiatedSlenderman.SetActive(true);
+            instantiatedSlenderman.transform.LookAt(pc);
             // Start coroutines for hiding slenderman and the TriggerPoint GameObject;
             //This makes to so we disable the slenderman game object after fixed amount of time has passed;
+            StartCoroutine(DisappearSlender());
             StartCoroutine(HideSlender(instantiatedSlenderman));
             hasSpawned = true;
         }
@@ -108,9 +113,15 @@ public class TriggerPoint : MonoBehaviour
             light.enabled = false;
 
         }
-        
 
 
+
+    }
+
+    private IEnumerator DisappearSlender()
+    {
+        yield return new WaitForSeconds(5f);
+        slenderman.SetActive(false);
     }
 
 
@@ -136,10 +147,4 @@ public class TriggerPoint : MonoBehaviour
         }
         return false;
     }
-
-
-
-
-
-
 }

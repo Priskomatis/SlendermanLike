@@ -23,11 +23,16 @@ public class PickUpText : MonoBehaviour
             text.text = "Press 'E' to open";
             StartCoroutine(DisappearText());
         }
+        else if (other.CompareTag("Battery")){
+            pickUpText.SetActive(true);
+            text.text = "Press 'E' to pick up Battery";
+            StartCoroutine(DisappearText());
+        }
 
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Page") || other.CompareTag("Door"))
+        if (other.CompareTag("Page") || other.CompareTag("Door") || other.CompareTag("Battery"))
         {
             pickUpText.SetActive(false);
         }
