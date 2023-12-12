@@ -34,6 +34,12 @@ public class PickUpText : MonoBehaviour
             text.text = "Press 'E' to read the notes";
             StartCoroutine(DisappearText());
         }
+        else if (other.CompareTag("Grave"))
+        {
+            pickUpText.SetActive(true);
+            text.text = "Press 'E' to read the grave";
+            StartCoroutine(DisappearText());
+        }
 
     }
     private void OnTriggerExit(Collider other)

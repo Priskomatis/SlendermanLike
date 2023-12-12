@@ -1,0 +1,18 @@
+Skull decimated.obj is a low-resolution version. The full resolution one is too large for uploading on any 3D model sharing platform.
+However, you can get the full-res version here:
+https://nc-shared05.yourownnet.cloud/s/s2t27Jx6DdBAF46
+
+If you have any trouble downloading it, contact me at:
+chameleonscales@protonmail.com
+Also, I'd love to see what you do with it if you'd like to show me!
+
+Licenced under a CC BY licence.
+
+WARNING: This is an unfinished project which needs more sculpting work, retopology and texturing (and possibly customizability if I'm up for it).
+I plan to get back to it when I upgrade my computer (hopefully somewhere in 2019)
+
+If you make improvements to the model and would like to share them under a CC BY license, please let me know.
+
+
+Credits:
+Teeth improved by wissamax: https://blenderartists.org/t/detailed-human-skull/689089/12
