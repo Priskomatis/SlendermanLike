@@ -28,6 +28,12 @@ public class PickUpText : MonoBehaviour
             text.text = "Press 'E' to pick up Battery";
             StartCoroutine(DisappearText());
         }
+        else if (other.CompareTag("Notes"))
+        {
+            pickUpText.SetActive(true);
+            text.text = "Press 'E' to read the notes";
+            StartCoroutine(DisappearText());
+        }
 
     }
     private void OnTriggerExit(Collider other)
