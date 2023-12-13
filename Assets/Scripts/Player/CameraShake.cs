@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ * We use this script to initiate the camera shake effect when we use the TriggerPoint script;
+ * 
+ */
 public class CameraShake : MonoBehaviour
 {
-	public Transform camTransform;
+	[SerializeField] private Transform camTransform;
 
-	// How long the object should shake for.
+	// How long the object should shake for;
 	public float shakeDuration = 0f;
 
-	// Amplitude of the shake. A larger value shakes the camera harder.
-	public float shakeAmount = 0.05f;
-	public float decreaseFactor = 1.0f;
+	// Amplitude of the shake. A larger value shakes the camera harder;
+	[SerializeField] private float shakeAmount = 0.05f;
+	[SerializeField] private float decreaseFactor = 1.0f;
 
 	Vector3 originalPos;
 
