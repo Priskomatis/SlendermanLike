@@ -11,6 +11,7 @@ public class Grave : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textPlace;
 
 
+
     private void Update()
     {
         if (canRead && Input.GetKeyDown(KeyCode.E)){

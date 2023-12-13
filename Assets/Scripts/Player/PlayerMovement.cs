@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
 	CharacterController characterController;
 
+
+
 	private void Start()
     {
         characterController = GetComponent<CharacterController>();

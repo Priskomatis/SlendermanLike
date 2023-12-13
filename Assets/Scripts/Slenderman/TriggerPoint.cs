@@ -30,6 +30,8 @@ public class TriggerPoint : MonoBehaviour
 
     private Flashlight flashLight;
     [SerializeField] Light light;
+
+    private CameraShake cameraShake;
     //Foudn a better way to do this with transform.LookAt();
     /**public enum Direction
     {
@@ -42,30 +44,11 @@ public class TriggerPoint : MonoBehaviour
     [Header("Direction List")]
     public Direction[] directions;*/
 
-    private float currentDirection =0f;
 
     private void Start()
     {
-
+        cameraShake = FindObjectOfType<CameraShake>();
         flashLight = FindObjectOfType<Flashlight>();
-
-        //We do this to find out the correct position of slender's rotation, so that we can play him looking at the player;
-        /*if(directions[0].ToString() == "North")
-        {
-            currentDirection = 0f;
-        }
-        else if (directions[0].ToString() == "South")
-        {
-            currentDirection = 90f;
-        }
-        else if (directions[0].ToString() == "West")
-        {
-            currentDirection = 180f;
-        }
-        else
-        {
-            currentDirection = 270f;
-        }*/
     }
 
 
@@ -77,7 +60,7 @@ public class TriggerPoint : MonoBehaviour
             // Debug.Log("Player here!");
 
             // Instantiate slenderman and store the reference
-            GameObject instantiatedSlenderman = Instantiate(slenderman, slenderSpawnPoint.position, Quaternion.Euler(0f, currentDirection, 0f));
+            GameObject instantiatedSlenderman = Instantiate(slenderman, slenderSpawnPoint.position, Quaternion.Euler(0f, 0f, 0f));
             instantiatedSlenderman.SetActive(true);
             instantiatedSlenderman.transform.LookAt(pc);
             // Start coroutines for hiding slenderman and the TriggerPoint GameObject;
@@ -100,6 +83,9 @@ public class TriggerPoint : MonoBehaviour
         heartBeat.Play();
         //Test - turn off the flashlight and the light
         flashLight.ToggleLight();
+        cameraShake.shakeDuration = 0.7f;
+
+
         if (light != null)
         {
             light.enabled = false;
