@@ -12,7 +12,7 @@ public class InGameMenu : MonoBehaviour
 
     private bool menuOpen;
 
-    //States
+    //States;
     enum States { pause, resume};
 
     private void Start()
@@ -27,31 +27,31 @@ public class InGameMenu : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
 
-            //If menu is already open
+            //If menu is already open;
             if (menuOpen)
             {
-                //Unpause the game
+                //Unpause the game;
                 UnPause();
 
-                //Close the menu panel
+                //Close the menu panel;
                 menuPanel.SetActive(false);
                 menuOpen = false;
 
-                //Disable cursor
+                //Disable cursor;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }
-            //if menu is not open
+            //if menu is not open;
             else
             {
-                //Pause the game
+                //Pause the game;
                 Pause();
 
-                //Activate the menu panel
+                //Activate the menu panel;
                 menuPanel.SetActive(true);
                 menuOpen = true;
 
-                //Enable cursor
+                //Enable cursor;
 
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -70,7 +70,7 @@ public class InGameMenu : MonoBehaviour
         //Closes game;
         menuPanel.SetActive(false);
 
-        //Stops the game from running
+        //Stops the game from running;
         UnPause();
     }
 
@@ -82,6 +82,7 @@ public class InGameMenu : MonoBehaviour
     public void UnPause()
     {
         Time.timeScale = 1f;
+        Cursor.visible = false;
     }
     public void Quit()
     {

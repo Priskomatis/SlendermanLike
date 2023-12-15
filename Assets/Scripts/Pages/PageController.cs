@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PageController : MonoBehaviour
 {
@@ -76,6 +77,7 @@ public class PageController : MonoBehaviour
             else if (pc.pages == 8)
             {
                 textPagePickUp = "Please leave me alone";
+                StartCoroutine(WinGame());
             }
 
 
@@ -127,5 +129,12 @@ public class PageController : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         collectable = false;
+    }
+
+    private IEnumerator WinGame()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("WinScene");
+
     }
 }
