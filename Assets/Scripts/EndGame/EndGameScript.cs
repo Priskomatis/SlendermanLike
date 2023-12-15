@@ -9,6 +9,7 @@ public class EndGameScript : MonoBehaviour
     private void Start()
     {
         StartCoroutine(DisplayText());
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private IEnumerator DisplayText()

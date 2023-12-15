@@ -12,7 +12,7 @@ public class BatteryScript : MonoBehaviour
     [SerializeField] private Slider slider;
     private bool pickUp;
 
-    private float energyConsumptionRate = 0.5f;
+    private float energyConsumptionRate = 0.3f;
 
     private void Start()
     {
@@ -37,17 +37,22 @@ public class BatteryScript : MonoBehaviour
             RechargeBattery();
             gameObject.SetActive(false);
         }
+        if (slider.value == 0)
+        {
+            flashLight.TurnOff();
+        }
     }
 
     private void ConsumeEnergy()
     {
         slider.value -= energyConsumptionRate * Time.deltaTime; //The slider decreaess based on how much energy we have consumed;
+
     }
 
     public void RechargeBattery()
     {
         // Recharge the battery by a fixed amount;
-        slider.value += 20;
+        slider.value += 30;
 
         if (slider.value > 100)
         {

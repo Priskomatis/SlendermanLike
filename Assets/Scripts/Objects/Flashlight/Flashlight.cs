@@ -27,4 +27,9 @@ public class Flashlight : MonoBehaviour
         isOn = !isOn;
 
     }
+    public void TurnOff()
+    {
+        flashlight.enabled = false;
+        isOn = false;
+    }
 }

@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
      * If the countdown reaches 0, then slenderman wins, and the player falls in "parania";
      */
 
-    private float countdownTime = 6; // Initial time in seconds is 10 minutes;
+    private float countdownTime = 600; // Initial time in seconds is 10 minutes;
     [SerializeField] private TextMeshProUGUI countdownText;
 
     void Start()
