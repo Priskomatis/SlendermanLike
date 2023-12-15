@@ -13,10 +13,10 @@ public class LoadImage : MonoBehaviour
         StartCoroutine(HideImage());
     }
 
-    //DO NOT KEEP THIS UNDER ANY CIRCUMSTANCES
+    //DO NOT KEEP THIS IN FINAL RELEASE UNDER ANY CIRCUMSTANCES
     private IEnumerator HideImage()
     {
-        yield return new WaitForSeconds(13.2f);
+        yield return new WaitForSeconds(14.5f);
         onLoadImage.SetActive(false);
         menu.SetActive(true);
     }
