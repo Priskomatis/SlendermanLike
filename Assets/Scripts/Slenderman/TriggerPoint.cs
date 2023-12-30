@@ -71,7 +71,7 @@ public class TriggerPoint : MonoBehaviour
         }
     }
 
-    private IEnumerator HideSlender(GameObject slendermanToHide)
+    public IEnumerator HideSlender(GameObject slendermanToHide)
     {
         while (!IsPlayerLookingAt(slendermanToHide))
         {

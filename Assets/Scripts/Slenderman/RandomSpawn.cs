@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,34 +21,52 @@ public class RandomSpawn : MonoBehaviour
 
     [SerializeField] private GameObject[] spawnPoints;
 
+    [SerializeField] private GameObject slenderman;
+    [SerializeField] private GameObject pc;
+
+    private TriggerPoint triggerPoint;
+
     private void Start()
     {
         StartCoroutine(SpawnRoutine());
+        triggerPoint = FindObjectOfType<TriggerPoint>();
     }
 
     private IEnumerator SpawnRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f); // Spawn every 10 seconds
+            yield return new WaitForSeconds(1f); // Spawn every Χ seconds
 
             int randomIndex = GetRandomSpawnPoint();
             if (randomIndex != -1)
             {
-                Spawn(spawnPoints[randomIndex]);
+                Spawn(spawnPoints[randomIndex].gameObject);
             }
+            
+
         }
     }
 
     private int GetRandomSpawnPoint()
     {
         int x = Random.Range(0, spawnPoints.Length);
+
         return x;
     }
     private void Spawn(GameObject spawnPoint)
     {
-        Debug.Log("Spawning at: " + spawnPoint.name);
-        // Add your spawning logic here
+        if (!slenderman.activeSelf)
+        {
+            Debug.Log("Spawning at: " + spawnPoint.name);
+            // Add your spawning logic here
+
+            GameObject instantiatedSlenderman = Instantiate(slenderman, spawnPoint.transform.position, Quaternion.Euler(0f, 0f, 0f));
+            instantiatedSlenderman.SetActive(true);
+            instantiatedSlenderman.transform.LookAt(pc.transform);
+            StartCoroutine(triggerPoint.HideSlender(instantiatedSlenderman));
+        }
+            
     }
 
 }
