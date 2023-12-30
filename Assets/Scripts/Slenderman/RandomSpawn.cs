@@ -83,7 +83,8 @@ public class RandomSpawn : MonoBehaviour
 
         GameObject instantiatedSlenderman = Instantiate(slenderman, spawnPoint.transform.position, Quaternion.Euler(0f, 0f, 0f));
         instantiatedSlenderman.SetActive(true);
-        instantiatedSlenderman.transform.LookAt(pc.transform);
+        Vector3 currentRotation = instantiatedSlenderman.transform.rotation.eulerAngles;
+        instantiatedSlenderman.transform.rotation = Quaternion.Euler(0f, currentRotation.y, currentRotation.z);
         StartCoroutine(triggerPoint.HideSlender(instantiatedSlenderman));
 
     }
