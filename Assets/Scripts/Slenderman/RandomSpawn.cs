@@ -24,27 +24,49 @@ public class RandomSpawn : MonoBehaviour
     [SerializeField] private GameObject slenderman;
     [SerializeField] private GameObject pc;
 
+    private PlayerController playerController;
+
     private TriggerPoint triggerPoint;
+
+    private float spawnTimer = 5f;
 
     private void Start()
     {
         StartCoroutine(SpawnRoutine());
         triggerPoint = FindObjectOfType<TriggerPoint>();
+        playerController = FindObjectOfType<PlayerController>();
     }
 
+    private void Update()
+    {
+        Debug.Log(spawnTimer);
+        if (playerController.pages < 2)
+            spawnTimer = 20f;
+        else if (playerController.pages < 4)
+            spawnTimer = 15f;
+        else if (playerController.pages < 6)
+            spawnTimer = 10f;
+        else
+            spawnTimer = 7f;
+    }
     private IEnumerator SpawnRoutine()
     {
+        //Debug.Log("Pages: "+playerController.pages);
         while (true)
         {
-            yield return new WaitForSeconds(1f); // Spawn every Χ seconds
+            yield return new WaitForSeconds(spawnTimer); // Spawn every Χ seconds
 
-            int randomIndex = GetRandomSpawnPoint();
-            if (randomIndex != -1)
+            //Here we check if slenderman already exist in our scene, if he does, then we should not spawn another slenderman prefab.
+            GameObject slendermanCheck = GameObject.Find("SlenderMan_Prototype(Clone)");
+            if (slendermanCheck == null || !slendermanCheck.activeSelf)
             {
-                Spawn(spawnPoints[randomIndex].gameObject);
+                int randomIndex = GetRandomSpawnPoint();
+                if (randomIndex != -1)
+                {
+                    Spawn(spawnPoints[randomIndex].gameObject);
+                    Debug.Log(randomIndex);
+                }
             }
-            
-
         }
     }
 
@@ -56,17 +78,14 @@ public class RandomSpawn : MonoBehaviour
     }
     private void Spawn(GameObject spawnPoint)
     {
-        if (!slenderman.activeSelf)
-        {
-            Debug.Log("Spawning at: " + spawnPoint.name);
-            // Add your spawning logic here
+        Debug.Log("Spawning at: " + spawnPoint.name);
 
-            GameObject instantiatedSlenderman = Instantiate(slenderman, spawnPoint.transform.position, Quaternion.Euler(0f, 0f, 0f));
-            instantiatedSlenderman.SetActive(true);
-            instantiatedSlenderman.transform.LookAt(pc.transform);
-            StartCoroutine(triggerPoint.HideSlender(instantiatedSlenderman));
-        }
-            
+
+        GameObject instantiatedSlenderman = Instantiate(slenderman, spawnPoint.transform.position, Quaternion.Euler(0f, 0f, 0f));
+        instantiatedSlenderman.SetActive(true);
+        instantiatedSlenderman.transform.LookAt(pc.transform);
+        StartCoroutine(triggerPoint.HideSlender(instantiatedSlenderman));
+
     }
 
 }

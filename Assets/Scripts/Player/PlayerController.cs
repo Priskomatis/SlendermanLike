@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public int pages;
+    public int pages = 0;
     private InGameMenu menu;
 
-
-    private void Awake()
-    {
-        pages = 0;
-    }
     private void Start()
     {
         menu = FindObjectOfType<InGameMenu>();
