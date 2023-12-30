@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 	//Audios
 	[SerializeField] private AudioSource[] audio_movement;
 
+	[SerializeField] private GameObject playerHand;
 
 	public Camera playerCamera;
 	public float walkSpeed = 6f;
@@ -106,6 +107,13 @@ public class PlayerMovement : MonoBehaviour
 			rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
 			playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
 			transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
-        }
-    }
+
+
+			float yRotation = playerCamera.transform.rotation.eulerAngles.y; // Get camera's Y-axis rotation
+			float xRotation = playerCamera.transform.rotation.eulerAngles.x;
+			float zRotation = playerCamera.transform.rotation.eulerAngles.z; // Get camera's Z-axis rotation
+			playerHand.transform.rotation = Quaternion.Euler(0, yRotation + 270, zRotation); // Adjust rotation based on the camera
+
+		}
+	}
 }
